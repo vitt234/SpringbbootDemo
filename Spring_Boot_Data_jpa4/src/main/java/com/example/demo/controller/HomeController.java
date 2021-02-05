@@ -54,6 +54,8 @@ public class HomeController {
 
 		if (student == null) {
 			String s1 = "<<<  Id is Already Present  >>>";
+			
+			System.out.println("hii this first demo project");
 
 			m.addAttribute("msg", s1);
 
