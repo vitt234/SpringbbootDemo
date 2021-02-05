@@ -2,6 +2,9 @@ package com.example.demo.controller;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.List;
 
@@ -175,5 +178,28 @@ public class HomeController {
 				.body(new InputStreamResource(bis));
 	}
 
+	////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	  @GetMapping("/excel")
+	    public void exportToExcel(HttpServletResponse response) throws IOException {
+	        response.setContentType("application/octet-stream");
+	        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+	        String currentDateTime = dateFormatter.format(new Date(0, 0, 0));
+	         
+	        String headerKey = "Content-Disposition";
+	        String headerValue = "attachment; filename=vitt" + currentDateTime + ".xlsx";
+	        response.setHeader(headerKey, headerValue);
+	        
+	        List<Student> listUsers = repo.findAll();
+
+	         
+	       
+	         
+	        UserExcel excelExporter = new UserExcel(listUsers);
+	         
+	        excelExporter.export(response);    
+	    }  
 
 }

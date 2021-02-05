@@ -32,6 +32,14 @@
 		document.form.action = "exportpdf";
 		document.form.submit();
 	}
+	
+	function exportexcel() {
+		alert("You Want to Genarate excel..?")
+		document.form.action = "excel";
+		document.form.submit();
+	}
+	
+	
 </script>
 
 
@@ -80,10 +88,6 @@
 			<%
 				}
 			%>
-
-
-
-
 			<tr>
 
 
@@ -103,13 +107,18 @@
 
 				</td>
 
-				<td colspan="2" align="center">
+				<td colspan="1" align="center">
 
 					<button class="button button1" onclick="deleteRecord()">Delete</button>
 				</td>
 
 
+<td colspan="1" align="center">
 
+					<button class="button button1" onclick="exportexcel()">ExportExcel</button>
+				</td>
+				
+				
 				<td colspan="3" align="center"><select name="sortvalue"
 					id="myselect" onchange="SortRecord()">
 						<option>SelectSort</option>
