@@ -29,17 +29,19 @@
 	}
 	function genrate() {
 
-		var option = document.getElementById("myselect").value
-		if (option == 1) {
-
-			alert("You Want to Genarate Pdf..?")
+		var option = document.getElementById("mydownload").value;
+		alert(option);
+		if (option == 1) 
+		{
+			alert("You Want to Genarate Pdf..?");
 			document.form.action = "exportpdf";
 			document.form.submit();
-		} else {
-			alert("You Want to Genarate excel..?")
+		} 
+		else 
+		{
+			alert("You Want to Genarate excel..?");
 			document.form.action = "excel";
 			document.form.submit();
-
 		}
 
 	}
@@ -123,7 +125,7 @@
 				</select></td>
 
 				<td colspan="3" align="center"><select name="download"
-					id="myselect" onchange="genrate()">
+					id="mydownload" onchange="genrate()">
 						<option>download</option>
 						<option value="1">PDF</option>
 						<option value="2">Excel</option>
