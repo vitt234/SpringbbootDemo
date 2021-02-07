@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,9 +31,11 @@ import com.example.demo.service.StudentServie;
 @Controller
 public class HomeController {
 
+	List<Student> elist=new ArrayList<Student>();
+	
 	@Autowired
 	StudentServie ser;
-	
+
 	@Autowired
 	StudentRepository repo;
 
@@ -57,7 +61,7 @@ public class HomeController {
 
 		if (student == null) {
 			String s1 = "<<<  Id is Already Present  >>>";
-			
+
 			System.out.println("hii this first demo project");
 
 			m.addAttribute("msg", s1);
@@ -71,7 +75,7 @@ public class HomeController {
 	@RequestMapping("/log")
 	public String login(@RequestParam("name") String uname, @RequestParam("password") String upass, Model m) {
 
-		Iterable<Student> elist = ser.login(uname, upass);
+		 elist = ser.login(uname, upass);
 
 		System.out.println("login list::-" + elist);
 
@@ -161,14 +165,12 @@ public class HomeController {
 		}
 
 	}
-	
-	
+
 	@GetMapping(value = "/exportpdf", produces = MediaType.APPLICATION_PDF_VALUE)
 	public ResponseEntity<InputStreamResource> employeeReports(HttpServletResponse response) throws IOException {
 
-		List<Student> allEmployees = repo.findAll();
-
-		ByteArrayInputStream bis = Exportpdf.employeesReport(allEmployees);
+		 
+		ByteArrayInputStream bis = Exportpdf.employeesReport(elist);
 
 		HttpHeaders headers = new HttpHeaders();
 
@@ -179,27 +181,26 @@ public class HomeController {
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	  @GetMapping("/excel")
-	    public void exportToExcel(HttpServletResponse response) throws IOException {
-	        response.setContentType("application/octet-stream");
-	        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-	        String currentDateTime = dateFormatter.format(new Date(0, 0, 0));
-	         
-	        String headerKey = "Content-Disposition";
-	        String headerValue = "attachment; filename=vitt" + currentDateTime + ".xlsx";
-	        response.setHeader(headerKey, headerValue);
-	        
-	        List<Student> listUsers = repo.findAll();
 
-	         
-	       
-	         
-	        UserExcel excelExporter = new UserExcel(listUsers);
-	         
-	        excelExporter.export(response);    
-	    }  
+	@GetMapping("/excel")
+	public void exportToExcel(
+			HttpServletResponse response) throws IOException {
+		response.setContentType("application/octet-stream");
+		
+		
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date(12, 12, 12));
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=vitt" + currentDateTime + ".xlsx";
+		response.setHeader(headerKey, headerValue);
+		
+		
+
+		UserExcel excelExporter = new UserExcel(elist);
+
+		excelExporter.export(response);
+
+	}
 
 }

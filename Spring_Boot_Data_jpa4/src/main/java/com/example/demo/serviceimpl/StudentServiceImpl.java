@@ -1,5 +1,7 @@
 package com.example.demo.serviceimpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,7 +57,7 @@ public class StudentServiceImpl implements StudentServie {
 	}
 
 	@Override
-	public Iterable<Student> login(String uname, String upass) {
+	public List<Student> login(String uname, String upass) {
 
 		if (uname.equalsIgnoreCase("admin") && upass.equalsIgnoreCase("admin")) {
 			return repo.findAll();

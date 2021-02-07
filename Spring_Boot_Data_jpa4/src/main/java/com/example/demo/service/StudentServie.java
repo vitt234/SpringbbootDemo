@@ -1,5 +1,7 @@
 package com.example.demo.service;
 
+import java.util.List;
+
 import com.example.demo.model.Student;
 
 public interface StudentServie {
@@ -8,7 +10,7 @@ public interface StudentServie {
 
 	public Iterable<Student> find();
 
-	public Iterable<Student> login(String uname, String upass);
+	public List<Student> login(String uname, String upass);
 
 	public Iterable<Student> deleteRecord(int id);
 

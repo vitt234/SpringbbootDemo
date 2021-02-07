@@ -27,19 +27,22 @@
 		document.form.action = "sort";
 		document.form.submit();
 	}
-	function pdfgenrate() {
-		alert("You Want to Genarate Pdf..?")
-		document.form.action = "exportpdf";
-		document.form.submit();
+	function genrate() {
+
+		var option = document.getElementById("myselect").value
+		if (option == 1) {
+
+			alert("You Want to Genarate Pdf..?")
+			document.form.action = "exportpdf";
+			document.form.submit();
+		} else {
+			alert("You Want to Genarate excel..?")
+			document.form.action = "excel";
+			document.form.submit();
+
+		}
+
 	}
-	
-	function exportexcel() {
-		alert("You Want to Genarate excel..?")
-		document.form.action = "excel";
-		document.form.submit();
-	}
-	
-	
 </script>
 
 
@@ -93,11 +96,6 @@
 
 				</td>
 
-				<td colspan="2" align="center">
-
-					<button class="button button1" onclick="pdfgenrate()">Export
-						Pdf</button>
-				</td>
 
 				<td colspan="2" align="center">
 
@@ -113,12 +111,8 @@
 				</td>
 
 
-<td colspan="1" align="center">
 
-					<button class="button button1" onclick="exportexcel()">ExportExcel</button>
-				</td>
-				
-				
+
 				<td colspan="3" align="center"><select name="sortvalue"
 					id="myselect" onchange="SortRecord()">
 						<option>SelectSort</option>
@@ -127,6 +121,15 @@
 						<option value="3">ByAdd</option>
 
 				</select></td>
+
+				<td colspan="3" align="center"><select name="download"
+					id="myselect" onchange="genrate()">
+						<option>download</option>
+						<option value="1">PDF</option>
+						<option value="2">Excel</option>
+				</select></td>
+
+
 			</tr>
 		</table>
 </form>

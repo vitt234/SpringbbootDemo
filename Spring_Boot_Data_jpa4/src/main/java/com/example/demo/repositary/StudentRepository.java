@@ -15,7 +15,7 @@ import com.example.demo.model.Student;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	public Iterable<Student> findByNameAndPassword(String uname, String upass);
+	public List<Student> findByNameAndPassword(String uname, String upass);
 
 	public Student findById(int id);
 
